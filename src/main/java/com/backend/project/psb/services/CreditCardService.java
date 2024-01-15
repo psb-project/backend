@@ -18,6 +18,7 @@ public class CreditCardService {
 
     private final UserRepo userRepo;
     private final CreditCardRepo creditCardRepo;
+    private final AccountService accountService;
 
 
     public List<CreditCard> getUserCreditCards(String username) throws Exception {
@@ -35,9 +36,9 @@ public class CreditCardService {
                 .cvv(creditCard.getCvv())
                 .user(user)
                 .build();
-
-
-        return creditCardRepo.save(creditCard1);
+        creditCard1 = creditCardRepo.save(creditCard1);
+        accountService.addCreditCardToUserAccount(user.getId(), creditCard1);
+        return creditCard1;
     }
 
 

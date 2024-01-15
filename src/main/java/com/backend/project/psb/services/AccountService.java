@@ -2,6 +2,7 @@ package com.backend.project.psb.services;
 
 
 import com.backend.project.psb.model.Account;
+import com.backend.project.psb.model.CreditCard;
 import com.backend.project.psb.model.User;
 import com.backend.project.psb.repository.AccountRepo;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +45,15 @@ public class AccountService {
                 .creationDate(Date.from(Instant.now()))
                 .build();
         return accountRepo.saveAndFlush(account);
+    }
+
+    public List<Account> getAllAccounts() {
+        return accountRepo.findAll();
+    }
+
+    public void addCreditCardToUserAccount(Long userId, CreditCard card) throws Exception {
+        Account account = getAccountForUser(userId);
+        account.getCreditCards().add(card);
+        accountRepo.saveAndFlush(account);
     }
 }

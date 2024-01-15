@@ -1,5 +1,6 @@
 package com.backend.project.psb.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -32,7 +33,9 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToOne
+    @OneToOne(mappedBy = "user")
+    @JsonBackReference
+    @ToString.Exclude
     private Account account;
 
     @Override
