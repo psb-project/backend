@@ -60,6 +60,10 @@ public class AccountService {
     public void subtractTransactionFromBalance(Account account, double amount) {
         account.setAccountBalance(account.getAccountBalance()-amount);
         accountRepo.saveAndFlush(account);
+    }
 
+    public Account addToAccountBalance(Account account, double amount) {
+        account.setAccountBalance(account.getAccountBalance()+amount);
+        return accountRepo.saveAndFlush(account);
     }
 }
