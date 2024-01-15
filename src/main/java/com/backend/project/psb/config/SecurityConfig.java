@@ -32,7 +32,7 @@ public class SecurityConfig {
         log.info("securityFilterChain implemented");
 
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/authenticate").permitAll()
+                        .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/authenticate","/","/api/v1/auth/welcome").permitAll()
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(
