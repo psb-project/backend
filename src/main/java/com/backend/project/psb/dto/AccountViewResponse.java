@@ -18,4 +18,6 @@ public class AccountViewResponse {
     private Long userId;
     private String username;
     private List<CreditCard> creditCards;
-    private Double accountBalance;}
+    private Double accountBalance;
+
+}
