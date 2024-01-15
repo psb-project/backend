@@ -34,6 +34,12 @@ public class UserController {
     private final JwtService jwtService; //de scos ( doar pt testat e folositor)
     private final UserDetailsService userDetailsService; // de scos si asta
 
+    @GetMapping("/")
+    public String goDefault() {
+        return "The service is working!";
+    }
+
+
     @GetMapping("/welcome")
     public String goHome() {
         return "this is publicly accessible with authentication";
