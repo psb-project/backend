@@ -32,6 +32,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToOne
+    private Account account;
 
     @Override
     public boolean equals(Object o) {

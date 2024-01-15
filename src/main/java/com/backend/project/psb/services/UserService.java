@@ -28,7 +28,12 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepo;
     private final AuthenticationManager authenticationManager;
+    private final AccountService accountService;
 
+/**
+    Registers new user and creates an account for it
+    @param request The Request body of the register request
+ **/
     public void register(RegisterRequest request) {
         log.info("Registering the user...");
         User user = User.builder()
@@ -37,8 +42,9 @@ public class UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
-        userRepo.save(user);
-
+        userRepo.saveAndFlush(user);
+        user.setAccount(accountService.createNewAccountForUser(user));
+        userRepo.saveAndFlush(user);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
