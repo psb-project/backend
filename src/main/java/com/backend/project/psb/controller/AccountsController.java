@@ -57,10 +57,10 @@ public class AccountsController {
     @PostMapping("add-balance")
     public ResponseEntity<?> addBalanceToAccount(@RequestBody AddBalanceRequest addBalanceRequest) {
         try {
-            Account account =
-                    accountService.addToAccountBalance(addBalanceRequest.getAccount(), addBalanceRequest.getAmount());
+            Account account = accountService.addToAccountBalance(accountService.getAccountById(
+                    addBalanceRequest.getAccountId()), addBalanceRequest.getAmount());
             return ResponseEntity.status(HttpStatus.OK).body(account);
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error adding balance to account");
         }
     }
