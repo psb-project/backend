@@ -66,4 +66,8 @@ public class AccountService {
         account.setAccountBalance(account.getAccountBalance()+amount);
         return accountRepo.saveAndFlush(account);
     }
+
+    public Account getAccountById(Long accountId) throws Exception {
+        return accountRepo.findById(accountId).orElseThrow(() -> new Exception("No account found with id " + accountId));
+    }
 }
